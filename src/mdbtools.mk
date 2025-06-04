@@ -3,8 +3,8 @@
 PKG             := mdbtools
 $(PKG)_WEBSITE  := https://github.com/mdbtools/mdbtools
 $(PKG)_IGNORE   :=
-$(PKG)_VERSION  := 1.0.0
-$(PKG)_CHECKSUM := 3446e1d71abdeb98d41e252777e67e1909b186496fda59f98f67032f7fbcd955
+$(PKG)_VERSION  := 1.0.1
+$(PKG)_CHECKSUM := ff9c425a88bc20bf9318a332eec50b17e77896eef65a0e69415ccb4e396d1812
 $(PKG)_GH_CONF  := mdbtools/mdbtools/releases, v
 $(PKG)_DEPS     := cc glib
 

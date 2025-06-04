@@ -3,20 +3,13 @@
 PKG             := openssl
 $(PKG)_WEBSITE  := https://www.openssl.org/
 $(PKG)_IGNORE   :=
-$(PKG)_VERSION  := 3.2.0
-$(PKG)_CHECKSUM := 14c826f07c7e433706fb5c69fa9e25dab95684844b4c962a2cf1bf183eb4690e
+$(PKG)_VERSION  := 3.5.0
+$(PKG)_CHECKSUM := 344d0a79f1a9b08029b0744e2cc401a43f9c90acd1044d09a530b4885a8e9fc0
+$(PKG)_GH_CONF  := openssl/openssl/releases,openssl-
 $(PKG)_SUBDIR   := openssl-$($(PKG)_VERSION)
 $(PKG)_FILE     := openssl-$($(PKG)_VERSION).tar.gz
-$(PKG)_URL      := https://www.openssl.org/source/$($(PKG)_FILE)
-$(PKG)_URL_2    := https://www.openssl.org/source/old/$(call tr,$([a-z]),,$($(PKG)_VERSION))/$($(PKG)_FILE)
+$(PKG)_URL      := https://github.com/openssl/openssl/releases/download/openssl-$($(PKG)_VERSION)/$($(PKG)_FILE)
 $(PKG)_DEPS     := cc zlib
-
-define $(PKG)_UPDATE
-    $(WGET) -q -O- 'https://www.openssl.org/source/' | \
-    $(SED) -n 's,.*openssl-\([0-9][0-9a-z.]*\)\.tar.*,\1,p' | \
-    $(SORT) -V | \
-    tail -1
-endef
 
 $(PKG)_MAKE = $(MAKE) -C '$(1)' -j '$(JOBS)'\
         CC='$(TARGET)-gcc' \

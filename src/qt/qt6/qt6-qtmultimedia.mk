@@ -5,7 +5,7 @@ include src/qt/qt6/qt6-conf.mk
 PKG := qt6-qtmultimedia
 $(eval $(QT6_METADATA))
 
-$(PKG)_CHECKSUM := 7ee4e2296f5714961692f6ded568d3e3fde3687cee48e9d717194b5d1360db4a
+$(PKG)_CHECKSUM := 955e36459518ee55f8e2bb79defc6e44aa94dc1edf5ac58a22d7734b2e07391d
 $(PKG)_DEPS     := cc qt6-conf qt6-qtbase qt6-qtshadertools ffmpeg
 
 QT6_PREFIX   = '$(PREFIX)/$(TARGET)/$(MXE_QT6_ID)'

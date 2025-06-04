@@ -5,13 +5,16 @@ include src/qt/qt6/qt6-conf.mk
 PKG := qt6-qttools
 $(eval $(QT6_METADATA))
 
-$(PKG)_CHECKSUM := 4939105a7345ab4e19e7caee8654a836e65bd41910359623e0f233f3aff0914a
+$(PKG)_CHECKSUM := 90c4a562f4ccfd043fd99f34c600853e0b5ba9babc6ec616c0f306f2ce3f4b4c
 $(PKG)_TARGETS  := $(BUILD) $(MXE_TARGETS)
 $(PKG)_DEPS_$(BUILD) := qt6-conf qt6-qtbase
 $(PKG)_DEPS     := cc $($(PKG)_DEPS_$(BUILD)) qt6-qtdeclarative $(BUILD)~$(PKG)
 
 define $(PKG)_BUILD
     $(QT6_QT_CMAKE) -S '$(SOURCE_DIR)' -B '$(BUILD_DIR)' \
+        -DMySQL_INCLUDE_DIR='$(PREFIX)/$(TARGET)/include/mariadb' \
+        -DMySQL_LIBRARY_DIR='$(PREFIX)/$(TARGET)/lib/mariadb' \
+        -DMySQL_LIBRARY=$(if $(BUILD_STATIC),"`$(TARGET)-pkg-config --libs libmariadb`",'$(PREFIX)/$(TARGET)/lib/mariadb/libmariadb.a') \
         -DQT_BUILD_TOOLS_WHEN_CROSSCOMPILING=ON
     $(if $(BUILD_STATIC),'$(SED)' -i "/^ *LINK_LIBRARIES = /{s/$$/ `'$(TARGET)-pkg-config' --libs libbrotlidec`/g}" '$(BUILD_DIR)/build.ninja',)
     # not built for some reason. make dummy so install won't fail
